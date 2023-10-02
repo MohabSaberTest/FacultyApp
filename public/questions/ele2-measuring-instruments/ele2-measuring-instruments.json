@@ -1,0 +1,88 @@
+{
+    "chapter1": [
+      {
+        "id": 1,
+        "q": "What is the definition of <b>Accuracy</b>?",
+
+        "choices": {
+          "a": "It is the ratio of linear movement of the pointer to the energizing quantity.",
+          "b": "It is defined as the deviation in the measured value from the true value",
+          "c": "It is the comparison of test instrument with the standard one.",
+          "d": "It is the smallest quantity that can be measured"
+        },
+        "correct": "b"
+      },
+      {
+        "id": 2,
+        "q": "What is the definition of <b>Resolution</b>?",
+
+        "choices": {
+          "a": "It is the ratio of linear movement of the pointer to the energizing quantity.",
+          "b": "It is defined as the deviation in the measured value from the true value",
+          "c": "It is the comparison of test instrument with the standard one.",
+          "d": "It is the smallest quantity that can be measured"
+        },
+        "correct": "d"
+      },
+      {
+        "id": 3,
+        "q": "What is the definition of <b>Sensitivity</b>?",
+
+        "choices": {
+          "a": "It is the ratio of linear movement of the pointer to the energizing quantity.",
+          "b": "It is defined as the deviation in the measured value from the true value",
+          "c": "It is the comparison of test instrument with the standard one.",
+          "d": "It is the smallest quantity that can be measured"
+        },
+        "correct": "a"
+      },
+      {
+        "id": 4,
+        "q": "What is the definition of <b>Calibration</b>?",
+
+        "choices": {
+          "a": "It is the ratio of linear movement of the pointer to the energizing quantity.",
+          "b": "It is defined as the deviation in the measured value from the true value",
+          "c": "It is the comparison of test instrument with the standard one.",
+          "d": "It is the smallest quantity that can be measured"
+        },
+        "correct": "c"
+      },
+      {
+        "id": 5,
+        "q": "Classify of Deflecting Instruments?",
+
+        "choices": {
+          "a": "Indicating Instruments.",
+          "b": "Recording Instruments.",
+          "c": "Integrating Instruments.",
+          "d": "All of the above"
+        },
+        "correct": "d"
+      },
+      {
+        "id": 6,
+        "q": "Which represents an Integrating Instrument?",
+
+        "choices": {
+          "a": "<img src='.\\questions\\ele2-measuring-instruments\\ch1-q6-1.jpg' style='width:100px'>",
+          "b": "<img src='.\\questions\\ele2-measuring-instruments\\ch1-q6-2.jpg' style='width:100px'>",
+          "c": "<img src='.\\questions\\ele2-measuring-instruments\\ch1-q6-3.jpg' style='width:100px'>",
+          "d": "-"
+        },
+        "correct": "c"
+      },
+      {
+        "id": 7,
+        "q": "Which Instrument Grade has 0.5% error?",
+
+        "choices": {
+          "a": "Standard Instrument.",
+          "b": "Sub-standard Instrument.",
+          "c": "First Grade Instruments.",
+          "d": "Second Grade Instruments."
+        },
+        "correct": "b"
+      }
+    ]
+  }

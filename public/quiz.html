@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/all.min.css">
+    <link rel="shortcut icon" href="./images/icon.ico" type="image/x-icon">
+
+</head>
+<body>
+    <div class="quiz-container" id="quiz">
+        <div class="quiz-header">
+            <h2 class="question" style="font-family: Segoe UI;">Question</h2>
+            <ul>
+                <li>
+                    <input type="radio" name="answer" id="a" class="answer"/>
+                    <label for="a" id="a_text">Answer</label>
+                </li>
+
+                <li>
+                    <input type="radio" name="answer" id="b" class="answer"/>
+                    <label for="b" id="b_text">Answer</label>
+                </li>
+
+                <li>
+                    <input type="radio" name="answer" id="c" class="answer"/>
+                    <label for="c" id="c_text">Answer</label>
+                </li>
+
+                <li>
+                    <input type="radio" name="answer" id="d" class="answer"/>
+                    <label for="d" id="d_text">Answer</label>
+                </li>
+            </ul>
+        </div>
+        <button id="submit">Submit</button>
+    </div>
+  <script>
+    //console.log(window.location.search) => ?curriculum=measuring-instruments
+    let params = window.location.search
+    function failure(){
+        document.getElementsByTagName("h2")[0].innerText = "Failed to fetch data :("
+        let btn = document.getElementById("submit");
+        btn.className = "disabled"
+        btn.setAttribute("disabled", "");
+    }
+    function validParams(){
+        if(params[0] != "?") return false;
+        params = params.slice(1, params.length);
+        if(params[10] != "=") return false;
+        params = params.slice(11, params.length);
+        return params
+
+    }
+    function viewQuestion(dataJsonFile){
+        const quizdev = document.getElementById("quiz");
+        const question = document.getElementsByClassName("question")[0];
+        const choices = document.getElementsByClassName("answer");
+        const a_text = document.getElementById("a_text");
+        const b_text = document.getElementById("b_text");
+        const c_text = document.getElementById("c_text");
+        const d_text = document.getElementById("d_text");
+        const btn = document.getElementById("submit");
+        let currentQuiz = 0
+        let score = 0
+
+        loadQuiz()
+        function loadQuiz(){
+            deselectAnswers()
+            const currentQuizData = dataJsonFile.chapter1[currentQuiz]
+            question.innerHTML = `${currentQuizData.id}. ${currentQuizData.q}`
+            a_text.innerHTML = currentQuizData.choices['a']
+            b_text.innerHTML = currentQuizData.choices['b']
+            c_text.innerHTML = currentQuizData.choices['c']
+            d_text.innerHTML = currentQuizData.choices['d']
+            console.log('==>',currentQuizData.choices['a'],'==>',a_text.innerHTML)
+        }
+
+        function deselectAnswers(){
+            arr = Array.from(choices)
+            arr.forEach(ele => {
+                ele.checked = false
+            });
+        }
+        function getSelectedAnswerId(){
+            let selected
+            arr1 = Array.from(choices)
+            arr1.forEach(ele =>{
+                if(ele.checked){selected = ele.id}
+            })
+            return selected
+        }
+        btn.addEventListener('click',()=>{
+            const answer = getSelectedAnswerId()
+            if(answer){
+                if(answer === dataJsonFile.chapter1[currentQuiz].correct){score++}
+                
+                currentQuiz++
+                if(currentQuiz < dataJsonFile.chapter1.length){
+                    loadQuiz()
+                }else{
+                    quiz.innerHTML = `
+                    <h2>You answered correctly ${score} out of ${dataJsonFile.chapter1.length}</h2>
+                    <button onclick="location.reload()">Reload</button>
+                    `
+                    
+                }
+                
+            }
+        })
+        
+
+
+
+
+
+
+
+
+    }
+    async function getLoadAndShowQuestions(){
+        let curriculum = validParams()
+        if(!curriculum){console.log(curriculum);failure();return;}
+        let res = await fetch(`./questions/ele2-${curriculum}/ele2-${curriculum}.json`);
+        let dataJsonFile = await res.json()
+        viewQuestion(dataJsonFile)
+    }
+    getLoadAndShowQuestions()
+  </script>  
+</body>
+</html>
