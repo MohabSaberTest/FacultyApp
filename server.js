@@ -21,4 +21,4 @@ app.use(express.urlencoded({ extended:false }));
 app.use(cors())
 
 app.use(express.static(path.join(__dirname,'public')));
-app.listen(PORT,()=>{console.log(`Server is running on PORT ${PORT}`)});
+app.listen(PORT,()=>{console.log(`Server has been FIRED on PORT${PORT}`)});
