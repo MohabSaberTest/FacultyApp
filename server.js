@@ -6,14 +6,7 @@ const PORT = process.env.PORT || 80 || 443;
 const cors = require('cors');
 
 
-async function fileReader(url){
-    try{
-    return await fs.promises.readFile(url, 'utf-8');
 
-    }catch(err){
-        return null
-    }
-}
 
 
 
