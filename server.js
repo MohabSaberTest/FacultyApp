@@ -1,18 +1,32 @@
-const TelegramBots = require('node-telegram-bot-api');
-require('dotenv').config()
+require('dotenv').config();
+const express = require('express');
+const axios = require('axios');
+const bodyParser = require('body-parser');
 
-const token = process.env.TOKEN;
+const PORT = process.env.PORT || 443;
+const {TOKEN, SERVER_URL} = process.env;
+const telegramApi = `https://api.telegram.org/bot${TOKEN}`;
+const URI = `/webhook/${TOKEN}`;
+const webhookUrl = SERVER_URL + URI;
 
-const bot = new TelegramBots(token, {polling: true});
+const app = express();
+app.use(bodyParser.json());
 
-
-bot.on('message', (msg) => {
-
-const chatId = msg.chat.id;
-if(msg.text == 'كسم السيسي'){
-    bot.sendMessage(chatId, 'كسمين أمه')
-}else{
-
-    bot.sendMessage(chatId, 'كسم السيسي');
+const init = async () => {
+  const res = await axios.get(`${telegramApi}/setWebhook?url=${webhookUrl}`)
 }
+
+app.post(URI, async (req, res) => {
+  const chatId = req.body.message.chat.id;
+  const text = req.body.message.text;
+
+  await axios.post(`${telegramApi}/sendMessage`, {
+    chat_id: chatId,
+    text:  text == 'كسم السيسي' ? 'كسمين أمه' : 'كسم السيسي'
+  })
+})
+
+app.listen(PORT, () => {
+  console.log(`SERVER is running on port ${PORT}`);
+  init();
 });
