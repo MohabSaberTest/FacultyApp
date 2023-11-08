@@ -1,17 +1,24 @@
-const fs = require('fs');
-const express = require('express');
-const path = require('path');
-const app = express();
-const PORT = process.env.PORT || 80 || 443;
-const cors = require('cors');
+const TelegramBots = require('node-telegram-bot-api');
+require('dotenv').config()
 
+const token = process.env.TOKEN;
 
+const bot = new TelegramBots(token, {polling: true});
 
+bot.onText(/\/echo (.+)/, (msg, match) => {
+    // 'msg' is the received Message from Telegram
+    // 'match' is the result of executing the regexp above on the text content
+    // of the message
+  
+    const chatId = msg.chat.id;
+    const resp = match[1]; // the captured "whatever"
+  
+    // send back the matched "whatever" to the chat
+    bot.sendMessage(chatId, resp);
+  });
+bot.on('message', (msg) => {
+const chatId = msg.chat.id;
 
-
-
-app.use(express.urlencoded({ extended:false }));
-app.use(cors())
-
-app.use(express.static(path.join(__dirname,'public')));
-app.listen(PORT,()=>{console.log(`Server has been FIRED on PORT${PORT}`)});
+// send a message to the chat acknowledging receipt of their message
+bot.sendMessage(chatId, msg);
+});
