@@ -24,6 +24,7 @@ app.post(URI, async (req, res) => {
     chat_id: chatId,
     text:  text == 'كسم السيسي' ? 'كسمين أمه' : 'كسم السيسي'
   })
+  res.sendStatus(200)
 })
 
 app.listen(PORT, () => {
